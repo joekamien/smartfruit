@@ -15,6 +15,12 @@ class FruitsController < ApplicationController
       fruits = fruits.where("colors @> ARRAY[?]::varchar[]", [ params[:color] ])
     end
 
-    render json: fruits
+    # get results of db query
+    results = fruits.to_a
+
+    # if there are no results, return nil
+    value = results.size > 0 ? results.as_json(only: [ :name, :in_season, :colors ]) : nil
+
+    render json: { value: }
   end
 end
