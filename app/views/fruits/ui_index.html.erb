@@ -3,14 +3,15 @@
 <%# filter form %>
 <%= form_with url: index_path, method: :get, local: true do |f| %>
 <div class="grid grid-cols-4 gap-4">
+    <% fieldset_classes = "border rounded-lg p-4" %>
     <%# search by name %>
-    <fieldset>
+    <fieldset class="<%= fieldset_classes %>">
         <legend>Filter by Name</legend>
-    <%= f.text_field :name, value: params[:name], onchange: "this.form.submit()" %>
+    <%= f.text_field :name, class: "bg-red-50", value: params[:name], onchange: "this.form.submit()" %>
     </fieldset>
     
     <%# in season only %>
-    <fieldset>
+    <fieldset class="<%= fieldset_classes %>">
         <legend>Filter by Seasonality</legend>
     <label>
         <%= radio_button_tag :in_season, "", params[:in_season].blank?, onchange: "this.form.submit()" %>
@@ -29,7 +30,7 @@
     </fieldset>
 
     <%# colors %>
-    <fieldset>
+    <fieldset class="<%= fieldset_classes %>">
         <legend>Filter by Color</legend>
     <% FruitsController.all_colors.each do |color_choice| %>
         <label>
@@ -41,9 +42,13 @@
     <% end %>
     </fieldset>
 
-    <div>
-        <%= f.submit "Apply Filters" %>
-        <%= link_to "Clear Filters", index_path %>
+    <div class="flex items-center">
+        <%= f.submit "Reapply Filters", 
+            class: "mx-2 bg-green-600 hover:bg-green-70 text-white px-4 py-2 rounded-lg font-medium transition" 
+        %>
+        <%= link_to "Clear Filters", index_path,
+            class: "mx-2 text-amber-700 hover:text-amber-900 underline text-sm"
+        %>
     </div>
 </div>
 <% end %>
