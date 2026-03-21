@@ -1,4 +1,10 @@
 class FruitsController < ApplicationController
+  def self.all_colors
+    Rails.cache.fetch("all_colors", expires_in: 1.hour) do
+      Fruit.pluck(:colors).flat_map { |color| color }.to_set
+    end
+  end
+
   def api_index
     results = filtered_fruit
 
