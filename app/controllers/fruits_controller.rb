@@ -1,5 +1,21 @@
 class FruitsController < ApplicationController
-  def index
+  def api_index
+    results = filtered_fruit
+
+    # if there are no results, return nil
+    value = results.size > 0 ? results.as_json(only: [ :name, :in_season, :colors ]) : nil
+
+    render json: { value: }
+  end
+
+  def ui_index
+    @fruits = filtered_fruit
+    respond_to :html
+  end
+
+  private
+
+  def filtered_fruit
     fruits = Fruit.all
 
     if params[:name].present?
@@ -15,12 +31,7 @@ class FruitsController < ApplicationController
       fruits = fruits.where("colors @> ARRAY[?]::varchar[]", [ params[:color] ])
     end
 
-    # get results of db query
-    results = fruits.to_a
-
-    # if there are no results, return nil
-    value = results.size > 0 ? results.as_json(only: [ :name, :in_season, :colors ]) : nil
-
-    render json: { value: }
+    # return results of db query
+    fruits.to_a
   end
 end
