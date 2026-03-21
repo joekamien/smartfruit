@@ -2,39 +2,55 @@
 
 <%# filter form %>
 <%= form_with url: index_path, method: :get, local: true do |f| %>
+<div class="grid grid-cols-4 gap-4">
     <%# search by name %>
-    <%= f.text_field :name, value: params[:name] %>
+    <fieldset>
+        <legend>Filter by Name</legend>
+    <%= f.text_field :name, value: params[:name], onchange: "this.form.submit()" %>
+    </fieldset>
     
     <%# in season only %>
+    <fieldset>
+        <legend>Filter by Seasonality</legend>
     <label>
-        <%= radio_button_tag :in_season, "", params[:in_season].blank? %>
+        <%= radio_button_tag :in_season, "", params[:in_season].blank?, onchange: "this.form.submit()" %>
         All
     </label>
 
     <label>
-        <%= radio_button_tag :in_season, "true", params[:in_season] == "true" %>
+        <%= radio_button_tag :in_season, "true", params[:in_season] == "true", onchange: "this.form.submit()" %>
         In Season only
     </label>
 
     <label>
-        <%= radio_button_tag :in_season, "false", params[:in_season] == "false" %>
+        <%= radio_button_tag :in_season, "false", params[:in_season] == "false", onchange: "this.form.submit()" %>
         Out of Season only
     </label>
+    </fieldset>
 
     <%# colors %>
+    <fieldset>
+        <legend>Filter by Color</legend>
     <% FruitsController.all_colors.each do |color_choice| %>
         <label>
-        <input type="checkbox" name="color[]" value="<%= color_choice %>"
+        <%# TODO: check if there's a ruby `form_with` input for this %>
+        <input type="checkbox" name="color[]" value="<%= color_choice %>" , onchange="this.form.submit()"
         <%= "checked" if Array(params[:color]).include?(color_choice) %>>
             <%= color_choice %>
         </label>
     <% end %>
+    </fieldset>
 
-    <%= f.submit "Search" %>
-    <%= link_to "Clear Filters", index_path %>
+    <div>
+        <%= f.submit "Apply Filters" %>
+        <%= link_to "Clear Filters", index_path %>
+    </div>
+</div>
 <% end %>
+</section>
 
 <%# display data %>
 <% @fruits.each do |fruit| %>
     <%= fruit.name %>
 <% end %>
+
