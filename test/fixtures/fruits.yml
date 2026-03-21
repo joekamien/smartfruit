@@ -2,10 +2,10 @@
 
 one:
   name: MyString
-  colors: MyString
+  colors: ["MyString"]
   in_season: false
 
 two:
   name: MyString
-  colors: MyString
+  colors: ["MyString"]
   in_season: false
