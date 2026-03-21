@@ -28,7 +28,8 @@ class FruitsController < ApplicationController
     end
 
     if params[:color].present?
-      fruits = fruits.where("colors @> ARRAY[?]::varchar[]", [ params[:color] ])
+      colors = Array(params[:color])
+      fruits = fruits.where("colors && ARRAY[?]::varchar[]", colors)
     end
 
     # return results of db query
