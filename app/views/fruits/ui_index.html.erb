@@ -78,12 +78,8 @@
                 <%= fruit.name %>
             </h3>
             <p class="text-gray-600 mt-2">
-                Available colors:
-                <% fruit.colors.each do |color| %>
-                    <span class="px-1">
-                        <%= color %>
-                    </span>
-                <% end %>
+                <%= "Color".pluralize(fruit.colors.size) %>:
+                <%= fruit.colors.to_sentence %>
             </p>
             <p class="text-gray-600 mt-2">
                 <% if fruit.in_season %>
