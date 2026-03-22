@@ -1,7 +1,10 @@
+<%= form_with url: index_path, method: :get, local: true do |f| %>
+<main class="container mx-auto mt-16 px-5 bg-color-bg-main">
+
+
 <h1>SmartFruit</h1>
 
 <%# filter form %>
-<%= form_with url: index_path, method: :get, local: true do |f| %>
 <div class="grid grid-cols-4 gap-4">
     <% fieldset_classes = "border border-brand-primary border-rounded-lg p-4" %>
     <%# search by name %>
@@ -51,7 +54,6 @@
         %>
     </div>
 </div>
-<% end %>
 </section>
 
 <%# display data %>
@@ -59,3 +61,5 @@
     <%= fruit.name %>
 <% end %>
 
+</main>
+<% end %>
