@@ -3,7 +3,7 @@
 <%# filter form %>
 <%= form_with url: index_path, method: :get, local: true do |f| %>
 <div class="grid grid-cols-4 gap-4">
-    <% fieldset_classes = "border rounded-lg p-4" %>
+    <% fieldset_classes = "border border-brand-primary border-rounded-lg p-4" %>
     <%# search by name %>
     <fieldset class="<%= fieldset_classes %>">
         <legend>Filter by Name</legend>
@@ -44,10 +44,10 @@
 
     <div class="flex items-center">
         <%= f.submit "Reapply Filters", 
-            class: "mx-2 bg-green-600 hover:bg-green-70 text-white px-4 py-2 rounded-lg font-medium transition" 
+            class: "mx-2 bg-brand-primary hover:bg-brand-primary-hover text-white px-4 py-2 rounded-lg font-medium transition" 
         %>
         <%= link_to "Clear Filters", index_path,
-            class: "mx-2 text-amber-700 hover:text-amber-900 underline text-sm"
+            class: "mx-2 text-brand-accent hover:text-brand-accent-hover underline text-sm"
         %>
     </div>
 </div>
