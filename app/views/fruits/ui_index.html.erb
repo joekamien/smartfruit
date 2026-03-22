@@ -5,13 +5,22 @@
 
 <main class="container mx-auto mt-16 px-5 grid grid-cols-1 md:grid-cols-4 gap-4">
 
+<script>
+  function debouncedSubmit(el) {
+    clearTimeout(el._timeout)
+
+    el._timeout = setTimeout(() => {
+      el.form.requestSubmit()
+    }, 300)
+  }
+</script>
 
 <!-- Header -->
 <section class="col-span-1 md:col-span-4 text-center">
     <h1 class="text-5xl mb-5">Explore the Harvest</h1>
     <h2 class="text-4xl mb-5">Find your perfect fruit today!</h2>
     <%# search by name %>
-    <%= f.text_field :name, placeholder: "search", class: "w-full md:w-lg bg-bg-subtle border border-brand-accent", value: params[:name], onchange: %>
+    <%= f.text_field :name, placeholder: "search", class: "w-full md:w-lg bg-bg-subtle border border-brand-accent", value: params[:name], oninput: "debouncedSubmit(this);" %>
 </section>
 
 
