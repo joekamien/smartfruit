@@ -14,7 +14,7 @@ class FruitsController < ApplicationController
     render json: { value: }
   end
 
-  def ui_index
+  def search
     @fruits = filtered_fruit
     respond_to :html
   end
