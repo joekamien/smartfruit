@@ -71,26 +71,33 @@
 <%# display data %>
 <turbo-frame id="results" class="col-span-1 md:col-span-3">
     <%# inner grid %>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-    <% @fruits.each do |fruit| %>
-        <div class="bg-white rounded-2xl shadow-md p-4">
-            <h3 class="text-lg font-semibold text-gray-800">
-                <%= fruit.name %>
-            </h3>
-            <p class="text-gray-600 mt-2">
-                <%= "Color".pluralize(fruit.colors.size) %>:
-                <%= fruit.colors.to_sentence %>
-            </p>
-            <p class="text-gray-600 mt-2">
-                <% if fruit.in_season %>
-                    ✅ In season
-                <% else %>
-                    🚫 Not in season
-                <% end %>
-            </p>
+        <% if @fruits.any? %>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <% @fruits.each do |fruit| %>
+            <div class="bg-white rounded-2xl shadow-md p-4">
+                <h3 class="text-lg font-semibold text-gray-800">
+                    <%= fruit.name %>
+                </h3>
+                <p class="text-gray-600 mt-2">
+                    <%= "Color".pluralize(fruit.colors.size) %>:
+                    <%= fruit.colors.to_sentence %>
+                </p>
+                <p class="text-gray-600 mt-2">
+                    <% if fruit.in_season %>
+                        ✅ In season
+                    <% else %>
+                        🚫 Not in season
+                    <% end %>
+                </p>
+            </div>
+        <% end %>
         </div>
+    <% else %>
+        <p>
+            There were no results for your query.
+            <%= link_to "Clear filters and try again.", search_path, data: { turbo: false }, class: "text-brand-accent hover:text-brand-accent-hover underline" %>
+        </p>
     <% end %>
-    </div>
 </turbo-frame>
 
 </main>
