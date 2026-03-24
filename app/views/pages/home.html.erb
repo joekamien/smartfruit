@@ -10,8 +10,17 @@
     </div>
   </div>
 
-  <div class="text-3xl col-span-1 md:col-span-4 text-center mb-4">
-    Find your perfect fruit today!
+  <div class="text-3xl col-span-1 md:col-span-4 text-center mb-5">
+    <p class="mb-2">
+      Find your perfect fruit today!
+    </p>
+    <%= form_with url: search_path, method: :get,  data: { turbo_frame: "results" } do |f| %>
+      <%= f.text_field :name, class: "w-full md:w-lg bg-bg-subtle border border-brand-accent" %>
+      <%= f.submit "Search",
+            class: "mx-2 bg-brand-primary hover:bg-brand-primary-hover text-white px-4 py-2 rounded-lg font-medium transition mt-2" 
+        %>
+    <% end %>
+
   </div>
 
   <div class="col-span-1 md:col-span-2 text-center">
@@ -23,13 +32,15 @@
   </div>
 
   <div class="col-span-1 md:col-span-2">
-    <p class="text-3xl">Benefits of Fruit</p>
+    <p class="text-3xl mb-3">Benefits of Fruit</p>
     <ul class="list-disc">
-      <li>Delicious</li>
-      <li>Colorful</li>
-      <li>In season (sometimes)</li>
+      <li class="text-lg">Delicious</li>
+      <li class="text-lg">Colorful</li>
+      <li class="text-lg">In season (sometimes)</li>
     </ul>
   </div>
+
+
 
 <section>
   Harvest Photo by <a href="https://unsplash.com/@spacedezert?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">SPACEDEZERT</a> on <a href="https://unsplash.com/photos/a-variety-of-fruits-and-vegetables-on-a-wooden-tray-FpW77sOxOYc?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>      
